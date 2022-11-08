@@ -1,25 +1,9 @@
 <template>
-  <div class="home" @click="handleClick">
-    首页
-    <h1>{{ xd }}</h1>
-    <h1>{{ data.a }}</h1>
-    <a-button type="primary">按钮</a-button>
-  </div>
+  <div color-red bg-blue font-600 fs-30 w-100 h-100 flexc>HelloWorld</div>
+  <a-button w-90px color-green! bg-red!>按钮</a-button>
 </template>
 
 <script setup>
 
-let xd = $ref(1)
-const data = reactive({ a: '小滴课堂' })
-
-const handleClick = () => {
-  xd = 2
-}
-
 </script>
 
-<style scoped>
-.home {
-  background-color: aqua;
-}
-</style>
