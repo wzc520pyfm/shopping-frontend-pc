@@ -1,3 +1,4 @@
+/** 全局的用户状态管理 */
 import { defineStore } from 'pinia';
 
 export const useUser = defineStore('user', () => {

@@ -6,8 +6,13 @@
   <h2>当前pinia的getter值: {{ multiplyCount }}</h2>
 </template>
 
-<script setup>
+<script lang="ts" setup>
+// 二次接口封装请求
+import { test } from '../api/test'
+const data = await test()
+console.log(data);
 
+// pinia调试
 const { count, add, multiplyCount } = $(useUser())
 const addClick = () => add()
 </script>
