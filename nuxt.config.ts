@@ -10,9 +10,19 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       Components({
-        resolvers: [AntDesignVueResolver()], // AntDesign按需引入
+        resolvers: [
+          AntDesignVueResolver({ importStyle: 'less', resolveIcons: true }),
+        ], // AntDesign按需引入
       }),
-    ]
+    ],
+    // 配置全局less预处理器
+    css: {
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true,
+        },
+      },
+    },
   },
   unocss: {
     uno: true,					//激活unocss

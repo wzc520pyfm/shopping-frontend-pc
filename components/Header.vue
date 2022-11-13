@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+const { registerModel } = $(useModel())
 
 </script>
 
@@ -18,12 +18,16 @@
       <div>
         <div class="login-or-registry" flexc>
           <span mr-8>登录</span>
-          <span class="register">
+          <span class="register" @click="registerModel.base=true">
             注册
           </span>
         </div>
       </div>
     </div>
+    <RegModal>
+      <RegisterBase></RegisterBase>
+    </RegModal>
+    <RegisterFinish></RegisterFinish>
   </div>
 </template>
 
