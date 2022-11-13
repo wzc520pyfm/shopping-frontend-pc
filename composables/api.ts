@@ -3,9 +3,10 @@
 // TODO: 后续改为nuxt官方封装的$fetch
 
 import { $fetch } from 'ohmyfetch';
-import type { FetchRequest, FetchResponse } from 'ohmyfetch';
+import type { FetchRequest, FetchOptions } from 'ohmyfetch';
+import { message } from 'ant-design-vue';
 
-export const baseUrl = 'http://127.0.0.1:8081';
+export const baseUrl = 'http://127.0.0.1:8081/api';
 
 const _useApi = $fetch.create({
   baseURL: baseUrl,
@@ -15,15 +16,20 @@ const _useApi = $fetch.create({
   },
 
   // 响应拦截器
-  async onResponse() {
+  async onResponse({ response }) {
     // 接口请求异常捕获
+
     // 根据不同的返回状态码, 返回不同的提示信息
+    const data = response._data;
+    if (data.code !== 0) {
+      message.error(data.msg)
+    }
   },
 });
 
 export const useApi = async function (
   request: FetchRequest,
-  options ?: FetchResponse<'json'>
+  options ?: FetchOptions<'json'>
 ) {
   return await _useApi(request, options);
 };

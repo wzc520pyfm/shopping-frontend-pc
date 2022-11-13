@@ -1,13 +1,15 @@
 <script lang="ts" setup>
 import { message } from 'ant-design-vue'
+import { sendCode } from '~/api/notify'
+import { register } from '~/api/account'
 
 const { changeToFinish } = $(useModel())
 
 const { registerCurrent } = defineProps<{
   registerCurrent: {
-    phone: string, 
-    code: string, 
-    captcha: string, 
+    phone: string,
+    code: string,
+    captcha: string,
     accept: boolean
   }
 }>()
@@ -22,7 +24,7 @@ const resetCaptchaSrc = () => {
 }
 
 // 获取手机验证码
-const getCode = () => {
+const getCode = async () => {
   // 手机号校验
   if (registerCurrent.phone) {
     const phoneReg = /^[1][3,4,5,7,8][0-9]{9}$/
@@ -36,7 +38,7 @@ const getCode = () => {
   }
 
   // 图形验证码
-  if(!registerCurrent.captcha) {
+  if (!registerCurrent.captcha) {
     message.warn('请输入图形验证码')
     return
   }
@@ -44,10 +46,14 @@ const getCode = () => {
   /**
    * 手机验证码接口
    */
-
-  isDisable = true
-  countDownFun()
-  message.success('发送手机号验证码成功')
+  const data = await sendCode(registerCurrent.phone, registerCurrent.captcha, 'register')
+  if (data.code === 0) {
+    isDisable = true
+    countDownFun()
+    message.success('发送手机号验证码成功')
+  } else {
+    resetCaptchaSrc()
+  }
 }
 
 // 验证码倒计时
@@ -66,7 +72,7 @@ const countDownFun = () => {
 }
 
 // 注册按钮
-const onRegisterClick = () => {
+const onRegisterClick = async () => {
   if (!registerCurrent.code) {
     message.warn('请先发送手机验证码')
     return
@@ -80,9 +86,13 @@ const onRegisterClick = () => {
   /**
    * 请求注册接口
    */
-
-  clearInfo()
-  changeToFinish()
+  const data = await register({ phone: registerCurrent.phone, code: registerCurrent.code })
+  if (data.code === 0) {
+    clearInfo()
+    changeToFinish()
+  } else {
+    resetCaptchaSrc()
+  }
 }
 
 const onFinish = () => {
