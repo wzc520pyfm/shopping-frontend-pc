@@ -1,7 +1,6 @@
 <template>
   <div>
-    头部
+    <Header />
     <slot />
-    底部
   </div>
 </template>

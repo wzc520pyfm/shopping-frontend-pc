@@ -6,13 +6,13 @@
 
 <script setup>
 useHead({
-  title: '小滴课堂',
+  title: 'CLS | shopping',
   meta: [
     {
-      name: 'description', content: '小滴课堂'
+      name: 'description', content: 'CloverShopping'
     },
     {
-      name: 'keywords', content: 'vue3,微服务,nuxt3'
+      name: 'keywords', content: 'shopping'
     }
   ]
 })
