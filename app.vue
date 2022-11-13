@@ -5,6 +5,8 @@
 </template>
 
 <script setup>
+import 'ant-design-vue/es/message/style/css'
+
 useHead({
   title: 'CLS | shopping',
   meta: [
