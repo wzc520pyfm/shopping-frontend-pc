@@ -6,7 +6,7 @@
  * @returns Promise
  */
 export const sendCode = async (phone: string, captcha: string, type: 'register' | 'login') => {
-  return await useApi('/notify/v1/send_code', {
+  return await useApi<null>('/notify/v1/send_code', {
     method: 'post',
     body: { phone, captcha, type },
   });
