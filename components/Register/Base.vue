@@ -3,7 +3,7 @@ import { message } from 'ant-design-vue'
 import { sendCode } from '~/api/notify'
 import { register } from '~/api/account'
 
-const { changeToFinish } = $(useModel())
+const { changeToFinish } = $(useModel())  // $()是解构多个ref对象的语法糖
 
 const { registerCurrent } = defineProps<{
   registerCurrent: {

@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-const { registerModel } = $(useModel())
+let { registerModel, wechatModel } = $(useModel())
 
 const emit = defineEmits(['cancel'])
 
 // 关闭注册框的事件
 const closeRegModel = () => {
   registerModel.base = false
+  wechatModel = false
   emit('cancel')
 }
 

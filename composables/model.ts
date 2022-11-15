@@ -9,6 +9,8 @@ export const useModel = defineStore('model', () => {
     base: false, // 注册初始页
     finish: false, // 注册成功页
   });
+  // 微信二维码是否展示
+  const wechatModel = ref(false);
 
   // 注册成功跳转到完成页
   const changeToFinish = () => {
@@ -18,5 +20,6 @@ export const useModel = defineStore('model', () => {
   return {
     registerModel,
     changeToFinish,
+    wechatModel,
   };
 });

@@ -2,13 +2,16 @@
 import { defineStore } from 'pinia';
 
 export const useUser = defineStore('user', () => {
-  let count = ref(1);
-  const add = () => { count.value++; }
-  const multiplyCount = computed(() => count.value * 2);
+  const token = ref('');
+
+  // 切换登录状态
+  const switchLoginState = (_token: string) => {
+    token.value = _token;
+    console.log(token);
+  };
 
   return {
-    count,
-    add,
-    multiplyCount,
-  };
+    switchLoginState,
+    token,
+  }
 }, { /** 持久化储存 */persist: true })

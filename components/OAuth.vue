@@ -1,10 +1,10 @@
 <script setup lang="ts">
-
+const { wechatModel } = $(useModel())
 </script>
 
 <template>
   <div class="oAuthLogin">
-    <img src="/images/wechat_icon.png" w-70px h-70px />
+    <img src="/images/wechat_icon.png" w-70px h-70px @click="wechatModel = true" />
   </div>
 </template>
 
