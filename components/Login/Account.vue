@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-
+const { changeToForget } = $(useModel())
 </script>
 
 <template>
@@ -20,7 +20,7 @@
         </a-form-item>
 
         <a-form-item>
-          <span cursor-pointer text-center text-12px color="#555555">忘记密码</span>
+          <span cursor-pointer text-center text-12px color="#555555" @click="changeToForget">忘记密码</span>
         </a-form-item>
       </div>
       <a-form-item>
