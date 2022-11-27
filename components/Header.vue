@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { registerModel, wechatModel } = $(useModel())
+const { registerModel, wechatModel, loginModel } = $(useModel())
 
 // 定义注册的初始表单数据
 const registerCurrent = reactive({
@@ -32,7 +32,7 @@ const onCancel = () => {
       <HeaderSearch />
       <div>
         <div class="login-or-registry" flexc>
-          <span mr-8>登录</span>
+          <span mr-8 @click="loginModel = true">登录</span>
           <span class="register" @click="registerModel.base = true">
             注册
           </span>
@@ -47,6 +47,7 @@ const onCancel = () => {
       <RegisterBase v-else :registerCurrent="registerCurrent"></RegisterBase>
     </RegModal>
     <RegisterFinish></RegisterFinish>
+    <Login />
   </div>
 </template>
 
