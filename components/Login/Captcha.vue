@@ -1,5 +1,10 @@
 <script lang="ts" setup>
 import { message } from 'ant-design-vue';
+import { login } from '~~/api/account';
+import { sendCode } from '~~/api/notify';
+
+let { loginModel } = $(useModel())
+let { switchLoginState } = $(useUser())
 
 // 初始值
 const currentInfo = reactive({
@@ -14,13 +19,15 @@ const rules = {
   code: [{ required: true, trigger: 'blur', message: '请输入手机验证码!' }]
 }
 // 表单提交
-const onFinish = () => {
-  console.log('登录')
-  /**
-   * 登录接口
-   */
+const onFinish = async () => {
+  // 登录接口
+  const res = await login({ phone: currentInfo.phone, code: currentInfo.code })
+  if (res.code === 0) {
+    switchLoginState(res.data)
+    loginModel = false
+    message.success('登录成功')
+  }
 }
-
 // 图形验证码
 let captchaSrc = $ref(`http://127.0.0.1:8081/api/notify/v1/captcha?type=login&time=${Date.now()}`)
 // 更新图形验证码
@@ -49,17 +56,22 @@ const countDownFun = () => {
 const formRef = ref(null)
 const getCode = () => {
   // antd表单验证, 只有当phone有值时才会执行then, 否则不会执行then且触发表单校验
-  formRef.value.validate('phone').then(() => {
+  formRef.value.validate('phone').then(async () => {
     if (!currentInfo.captcha) {
       message.warn('请输入图形验证码')
       return
     }
-    /**
-     * 短信验证码发送接口
-     */
     isDisable = true
-    countDownFun()
-    message.success('发送验证码成功')
+    // 短信验证码发送接口
+    const res = await sendCode({ phone: currentInfo.phone, captcha: currentInfo.captcha, type: 'login' })
+    if (res.code === 0) {
+      countDownFun()
+      message.success('发送验证码成功')
+    } else {
+      isDisable = false
+      resetCaptchaSrc()
+    }
+
   })
 }
 
@@ -92,7 +104,7 @@ const getCode = () => {
           <template #suffix>
             <div>
               <a-button type="link" size="small" p-0 :disabled="isDisable" @click="getCode">
-                {{isDisable ? `${countDown}秒后重发` : '获取验证码'}}
+                {{ isDisable ? `${countDown}秒后重发` : '获取验证码' }}
               </a-button>
             </div>
           </template>

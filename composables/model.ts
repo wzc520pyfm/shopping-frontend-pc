@@ -19,6 +19,7 @@ export const useModel = defineStore('model', () => {
   const forgetModel = reactive({
     first: false,
     second: false,
+    phoneCache: '' // 临时缓存手机号码
   });
 
   // 注册成功跳转到完成页

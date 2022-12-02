@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { message } from 'ant-design-vue';
+import { forget } from '~~/api/account';
+
 const { forgetModel, switchForget } = $(useModel())
 const back = () => {
   switchForget()
@@ -15,12 +18,13 @@ const rules = {
   password: [{ required: true, trigger: 'blur', message: '请输入新密码!' }]
 }
 // 表单提交
-const onFinish = () => {
-  console.log('提交')
-  /**
-   * 设置密码接口
-   */
-  forgetModel.second = false
+const onFinish = async () => {
+  // 设置密码接口
+  const res = await forget({ phone: forgetModel.phoneCache, code: currentInfo.code, password: currentInfo.password })
+  if (res.code === 0) {
+    forgetModel.second = false
+    message.success('设置密码成功')
+  }
 }
 </script>
 

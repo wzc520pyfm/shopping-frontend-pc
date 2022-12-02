@@ -46,7 +46,7 @@ const getCode = async () => {
   /**
    * 手机验证码接口
    */
-  const data = await sendCode(registerCurrent.phone, registerCurrent.captcha, 'register')
+  const data = await sendCode({ phone: registerCurrent.phone, captcha: registerCurrent.captcha, type: 'register' })
   if (data.code === 0) {
     isDisable = true
     countDownFun()

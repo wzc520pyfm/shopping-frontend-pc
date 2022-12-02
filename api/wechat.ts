@@ -9,8 +9,8 @@ export const getWechat = async () => {
   return await useApi<IWechat>('/wx_login/v1/login');
 };
 
-export const watchScan = async (ticket: string) => {
+export const watchScan = async (options: { ticket: string }) => {
   return await useApi<null>('/wx_login/v1/check_scan', {
-    params: { ticket }
+    params: options
   });
 }

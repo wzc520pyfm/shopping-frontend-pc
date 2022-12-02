@@ -1,5 +1,10 @@
 <script lang="ts" setup>
-const { changeToForget } = $(useModel())
+import { message } from 'ant-design-vue';
+import { login } from '~~/api/account';
+
+let { changeToForget, loginModel } = $(useModel())
+let { switchLoginState } = $(useUser())
+
 // 初始值
 const currentInfo = reactive({
   phone: '',
@@ -11,11 +16,15 @@ const rules = {
   password: [{ required: true, trigger: 'blur', message: '请输入密码!' }]
 }
 // 表单提交
-const onFinish = () => {
+const onFinish = async () => {
   console.log('登录')
-  /**
-   * 登录接口
-   */
+  // 登录接口
+  const res = await login({ phone: currentInfo.phone, password: currentInfo.password })
+  if (res.code === 0) {
+    switchLoginState(res.data)
+    loginModel = false
+    message.success('登录成功')
+  }
 }
 </script>
 

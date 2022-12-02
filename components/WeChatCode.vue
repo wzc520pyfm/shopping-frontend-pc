@@ -26,7 +26,7 @@ await getQrcode()
 
 // 轮询接口请求
 const watchScanDate = async (ticket: string) => {
-  const res = await watchScan(ticket)
+  const res = await watchScan({ ticket })
   if (res.code === 0) {
     wechatModel = false
     registerModel.base = false
@@ -52,4 +52,5 @@ const watchScanDate = async (ticket: string) => {
 
 
 <style lang="less" scoped>
+
 </style>

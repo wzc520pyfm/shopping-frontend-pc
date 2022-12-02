@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { message } from 'ant-design-vue';
+import { sendCode } from '~~/api/notify';
+
 const { forgetModel, switchForget } = $(useModel())
 // 初始值
 const currentInfo = reactive({
@@ -11,12 +14,14 @@ const rules = {
   captcha: [{ required: true, trigger: 'blur', message: '请输入图形验证码!' }]
 }
 // 表单提交
-const onFinish = () => {
-  console.log('下一步')
-  /**
-   * 发送短信验证码接口
-   */
-   switchForget()
+const onFinish = async () => {
+  // 短信验证码发送接口
+  const res = await sendCode({ phone: currentInfo.phone, captcha: currentInfo.captcha, type: 'change' })
+  if (res.code === 0) {
+    forgetModel.phoneCache = currentInfo.phone
+    switchForget()
+    message.success(res.msg)
+  }
 }
 
 // 图形验证码
