@@ -17,8 +17,8 @@ const activeKey = ref(0)
           <img @click="loginModel = false" src="/images/svg/close_icon.svg"
             class="cursor-pointer select-none w-20px! h-20px!" />
         </div>
-        <login-account wfull hfull v-show="activeKey === 0" />
-        <login-captcha wfull hfull v-show="activeKey === 1" />
+        <login-account wfull hfull v-if="activeKey === 0" />
+        <login-captcha wfull hfull v-if="activeKey === 1" />
       </div>
     </div>
   </div>

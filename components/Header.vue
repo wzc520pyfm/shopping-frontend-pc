@@ -48,6 +48,7 @@ const onCancel = () => {
     </RegModal>
     <RegisterFinish></RegisterFinish>
     <Login />
+    <Forget />
   </div>
 </template>
 
