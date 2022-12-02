@@ -5,7 +5,7 @@ export default defineConfig({
   shortcuts: [
     { flexc: 'flex items-center justify-center' },
     { flexb: 'flex items-center justify-between' },
-    { btn: 'rounded-5px text-center cursor-pointer select-none' },
+    { btn: 'rounded-5px text-center cursor-pointer select-none border-0' },
     { 'text-btn': 'text-center cursor-pointer select-none' },
   ],
   rules: [

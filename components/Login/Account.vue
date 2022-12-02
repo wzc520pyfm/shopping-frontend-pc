@@ -1,15 +1,33 @@
 <script lang="ts" setup>
 const { changeToForget } = $(useModel())
+// 初始值
+const currentInfo = reactive({
+  phone: '',
+  password: ''
+})
+// 校验规则
+const rules = {
+  phone: [{ required: true, trigger: 'blur', message: '请输入手机号!' }],
+  password: [{ required: true, trigger: 'blur', message: '请输入密码!' }]
+}
+// 表单提交
+const onFinish = () => {
+  console.log('登录')
+  /**
+   * 登录接口
+   */
+}
 </script>
 
 <template>
   <div>
-    <a-form autocomplete="off" ref="formRef">
-      <a-form-item name="account">
-        <a-input placeholder="请输入账号（手机号或邮箱）" />
+    <a-form autocomplete="off" ref="formRef" :model="currentInfo" @finish="onFinish">
+      <a-form-item name="phone" :rules="rules.phone">
+        <a-input placeholder="请输入手机号" v-model:value="currentInfo.phone" />
       </a-form-item>
-      <a-form-item name="password">
-        <a-input-password type="password" placeholder="请输入密码" autoComplete="false" />
+      <a-form-item name="password" :rules="rules.password">
+        <a-input-password type="password" placeholder="请输入密码" autoComplete="false"
+          v-model:value="currentInfo.password" />
       </a-form-item>
       <div flexb>
         <a-form-item>
