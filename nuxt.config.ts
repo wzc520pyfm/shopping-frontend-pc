@@ -7,6 +7,11 @@ export default defineNuxtConfig({
   experimental: {
     reactivityTransform: true, // 开启自动响应式转换(使用: let age = $ref(1); age = 2// 注意不需要是age.value = 2)
   },
+  // fixed: swiper报错([vite-node] [ERR_INVALID_URL_SCHEME] /node_modules/swiper/core/core.js)
+  // see: https://github.com/nuxt/framework/issues/5348
+  build: {
+    transpile: ['swiper']
+  },
   vite: {
     plugins: [
       Components({

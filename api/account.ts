@@ -1,3 +1,5 @@
+import { IUserInfo } from "~~/types/api";
+
 /**
  * 注册接口
  * @param options 
@@ -38,3 +40,9 @@ export const forget = async (options: { phone: string, code: string, password: s
   });
 };
 
+/**
+ * 获取用户信息
+ */
+ export const getUserInfo = async function () {
+  return await useApi<IUserInfo>('/user/v1/detail')
+}

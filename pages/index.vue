@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Banner from './index/Banner.vue'
 import Classify from './index/Classify.vue'
-import UserInformation from './index/UserInformation.vue'
+import UserInformation from './index/UserInfomation.vue'
 
 useHead({
   title: '首页'
@@ -29,22 +29,23 @@ useHead({
 </template>
 
 <style lang="less" scoped>
-  .main {
-    display: flex;
-    height: 400px;
-    .swiper {
-      flex: 5;
-      border-radius: 10px;
-    }
-  }
+.main {
+  display: flex;
+  height: 400px;
 
-  .card-container {
-    margin-bottom: 20px;
+  .swiper {
+    flex: 5;
+    border-radius: 10px;
   }
+}
 
-  .two-card-container {
-    display: flex;
-    margin-bottom: 20px;
-    justify-content: space-between;
-  }
+.card-container {
+  margin-bottom: 20px;
+}
+
+.two-card-container {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
 </style>
