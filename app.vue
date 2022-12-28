@@ -29,6 +29,6 @@ useHead({
   </NuxtLayout>
 </template>
 
-<style scoped>
+<style lang='less'>
 @import '~/assets/reset.less';
 </style>

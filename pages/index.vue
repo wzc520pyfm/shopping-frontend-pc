@@ -9,7 +9,7 @@ useHead({
 </script>
 
 <template>
-  <div style="width: 1200px; min-width: 1200px">
+  <div style="width: 1200px; min-width: 1200px; margin: auto;">
     <div class="main">
       <!-- 分类 -->
       <div class="menu">
