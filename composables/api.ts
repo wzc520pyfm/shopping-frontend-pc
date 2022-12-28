@@ -12,8 +12,11 @@ export const baseUrl = 'http://127.0.0.1:8081/api';
 const _useApi = $fetch.create({
   baseURL: baseUrl,
   // 请求拦截器
-  async onRequest() {
+  async onRequest({ options }) {
     // 请求头加token的操作
+    const { token } = $(useUser())
+    options.headers = new Headers(options.headers)
+    if (token) options.headers.set('authorization', token)
   },
 
   // 响应拦截器
@@ -23,6 +26,7 @@ const _useApi = $fetch.create({
     // 根据不同的返回状态码, 返回不同的提示信息
     const data = response._data;
     if (data.code !== 0) {
+      if (data.code === 270004) return
       if (data.code === 270004) return
       message.error(data.msg)
     }

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { registerModel, wechatModel, loginModel } = $(useModel())
+const { personalInfo, isLogin, logout } = $(useUser())
 
 // 定义注册的初始表单数据
 const registerCurrent = reactive({
@@ -16,6 +17,9 @@ const onCancel = () => {
   registerCurrent.accept = false
 }
 
+const userLogout = () => {
+  logout()
+}
 </script>
 
 <template>
@@ -31,7 +35,24 @@ const onCancel = () => {
       </div>
       <HeaderSearch />
       <div>
-        <div class="login-or-registry" flexc>
+        <div v-if="isLogin" flexc>
+          <a-dropdown>
+            <div relative>
+              <a-avatar :size="50" :src="personalInfo.head_img" />
+            </div>
+            <template #overlay>
+              <a-menu>
+                <a-menu-item>
+                  <span text-center>{{ personalInfo.username }}</span>
+                </a-menu-item>
+                <a-menu-item>
+                  <span text-center @click="userLogout()">退出登录</span>
+                </a-menu-item>
+              </a-menu>
+            </template>
+          </a-dropdown>
+        </div>
+        <div v-else class="login-or-registry" flexc>
           <span mr-8 @click="loginModel = true">登录</span>
           <span class="register" @click="registerModel.base = true">
             注册
