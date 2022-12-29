@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { getList } from '~~/api/category';
+import { getCategoryList } from '~~/api/category';
 import type { ICategoryList } from '~~/types/api';
 
 let now = $ref(0) // 鼠标悬浮选中的项
@@ -15,7 +15,7 @@ const switchCategory = function (idx: number) {
 }
 // 课程分类接口请求
 let data = $ref<ICategoryList[]>()
-data = (await getList()).data.map(item => {
+data = (await getCategoryList()).data.map(item => {
   item.name = item.name.replace('&', ' | ') // 替换分隔符
   return item
 })

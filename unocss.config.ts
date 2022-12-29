@@ -28,7 +28,7 @@ export default defineConfig({
       }),
     ],
     [
-      /^wh-(\d+)$/,
+      /^wh-(\d+)px$/,
       ([, d]) => ({
         width: `${d}px`,
         height: `${d}px`,
