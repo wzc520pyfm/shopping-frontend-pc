@@ -26,7 +26,7 @@ const convertLevel = (level: string) => {
     <div class="level">
       <div mr-12px>级别: {{ convertLevel(cardTag.course_level) }}</div>
       <span ml-4px flexc>
-        <img mr-4px wh-14px src="/image/fire.png" v-for="i in 5" :key="i" />
+        <img mr-4px wh-14px src="/images/fire.png" v-for="i in 5" :key="i" />
       </span>
     </div>
     <div class="peoples-price">
